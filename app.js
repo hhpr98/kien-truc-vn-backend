@@ -4,7 +4,13 @@ const path = require('path');
 const app = express();
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, 'ui')));
+// structure on the host:
+// - webapp
+//   - backend
+//     - app.js
+//   - ui
+//     - dist (build output directory)
+app.use(express.static(path.join(__dirname, '../ui/dist')));
 
 // API route
 app.use('/api', (req, res) => {
@@ -13,7 +19,7 @@ app.use('/api', (req, res) => {
 
 // Catch-all handler for React app
 app.get('*splat', (req, res) => {
-  res.sendFile(path.join(__dirname, 'ui', 'index.html'));
+  res.sendFile(path.join(__dirname, '../ui/dist', 'index.html'));
 });
 
 const PORT = 3000;
