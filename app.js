@@ -10,6 +10,7 @@ const app = express();
 //     - app.js
 //   - ui
 //     - dist (build output directory)
+app.use('/icons', express.static(path.join(__dirname, '../ui/dist/icons')));
 app.use(express.static(path.join(__dirname, '../ui/dist')));
 
 // API route
