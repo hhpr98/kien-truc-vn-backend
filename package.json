@@ -1,0 +1,20 @@
+{
+  "name": "kien-truc-vn-backend",
+  "version": "1.0.0",
+  "description": "Backend app for kien-truc-vn",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hhpr98/kien-truc-vn-backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hhpr98/kien-truc-vn-backend/issues"
+  },
+  "homepage": "https://github.com/hhpr98/kien-truc-vn-backend#readme"
+}
