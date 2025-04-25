@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/hhpr98/kien-truc-vn-backend/issues"
   },
-  "homepage": "https://github.com/hhpr98/kien-truc-vn-backend#readme"
+  "homepage": "https://github.com/hhpr98/kien-truc-vn-backend#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
