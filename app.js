@@ -11,7 +11,12 @@ const app = express();
 //     - app.js
 //   - ui
 //     - dist (build output directory)
+//   - images
+//     - du-an
 app.use(express.static(path.join(__dirname, '../ui/dist')));
+const env = process.env.NODE_ENV || 'production';
+const config = require(path.join(__dirname, './config/config.json'))[env];
+app.use(express.static(config['image-path']));
 
 // Use express.json() middleware to parse JSON bodies
 app.use(express.json());
