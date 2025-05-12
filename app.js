@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const apiControllers = require('./controllers/apiControllers');
 
 const app = express();
 
@@ -12,25 +13,10 @@ const app = express();
 //     - dist (build output directory)
 app.use(express.static(path.join(__dirname, '../ui/dist')));
 
-// Import Sequelize models
-const db = require('./models'); // this loads index.js from /models
 // Use express.json() middleware to parse JSON bodies
 app.use(express.json());
 
-// API route
-app.use('/api', (req, res) => {
-  res.json({ message: 'This is the API endpoint' });
-});
-
-app.get('/projects', async (req, res) => {
-  try {
-    const projects = await db.project.findAll();
-    res.json(projects);
-  } catch (err) {
-    console.error('Error fetching projects:', err);
-    res.status(500).json({ error: 'Internal server error' });
-  }
-});
+app.use('/api', apiControllers);
 
 // Catch-all handler for React app
 app.get('*splat', (req, res) => {
