@@ -5,7 +5,7 @@ const apiControllers = express.Router();
 
 // API route
 apiControllers.get('/', (req, res) => {
-    res.json({ message: 'This is the API endpoint' });
+  res.json({ message: 'This is the API endpoint' });
 });
 
 // Use projectControllers for project routes
