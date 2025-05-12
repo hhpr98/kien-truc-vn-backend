@@ -20,6 +20,6 @@
     "database": "apd56709_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "image-path": "var/www/vhosts/apdesignarch.vn/webapp/uploads/images/du-an/"
+    "image-path": "/var/www/vhosts/apdesignarch.vn/webapp/uploads/images/du-an/"
   }
 }
