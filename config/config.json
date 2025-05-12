@@ -4,7 +4,8 @@
     "password": "Nguyenhuuhoalove15041998@@",
     "database": "apd56709_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "image-path": "D:/git/kien-truc-vn-backend/images/du-an"
   },
   "test": {
     "username": "root",
@@ -18,6 +19,7 @@
     "password": "Nguyenhuuhoalove15041998@@",
     "database": "apd56709_db",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    "image-path": "/webapp/images/du-an"
   }
 }
