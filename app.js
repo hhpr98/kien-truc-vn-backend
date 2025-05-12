@@ -1,7 +1,11 @@
+// Handle logs session in top of app.js
+const logger = require('./appLogger');
+logger(); // Initialize logger
+
 const express = require('express');
-const path = require('path');
 const apiControllers = require('./controllers/apiControllers');
 const getImagePath = require('./helpers/getImagePath');
+const path = require('path');
 
 const app = express();
 
