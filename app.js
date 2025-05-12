@@ -1,10 +1,9 @@
 const express = require('express');
 const path = require('path');
-const dotenv = require('dotenv');
 const apiControllers = require('./controllers/apiControllers');
+const getImagePath = require('./helpers/getImagePath');
 
 const app = express();
-dotenv.config();
 
 // structure on the host:
 // - webapp
@@ -15,11 +14,8 @@ dotenv.config();
 //   - uploads
 //     - images
 //       - du-an
-const env = process.env.NODE_ENV || 'production';
-const config = require(path.join(__dirname, './config/config.json'))[env];
 // Serve static files from the images directory in host
-app.use("/images", express.static(config['image-path']));
-console.log("Serving images from: ", config['image-path']);
+app.use("/images", express.static(getImagePath()));
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../ui/dist')));
 
@@ -29,7 +25,7 @@ app.use(express.json());
 app.use('/api', apiControllers);
 
 // Catch-all handler for React app
-app.get('*splat', (req, res) => {
+app.get('*splat', (_, res) => {
   res.sendFile(path.join(__dirname, '../ui/dist', 'index.html'));
 });
 
