@@ -1,22 +1,27 @@
 const express = require('express');
 const path = require('path');
+const dotenv = require('dotenv');
 const apiControllers = require('./controllers/apiControllers');
 
 const app = express();
+dotenv.config();
 
-// Serve static files from the React app
 // structure on the host:
 // - webapp
 //   - backend
 //     - app.js
 //   - ui
 //     - dist (build output directory)
-//   - images
-//     - du-an
-app.use(express.static(path.join(__dirname, '../ui/dist')));
+//   - uploads
+//     - images
+//       - du-an
 const env = process.env.NODE_ENV || 'production';
 const config = require(path.join(__dirname, './config/config.json'))[env];
-app.use(express.static(config['image-path']));
+// Serve static files from the images directory in host
+app.use("/images", express.static(config['image-path']));
+console.log("Serving images from: ", config['image-path']);
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../ui/dist')));
 
 // Use express.json() middleware to parse JSON bodies
 app.use(express.json());
