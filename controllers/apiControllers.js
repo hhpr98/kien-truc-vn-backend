@@ -1,5 +1,6 @@
 const express = require('express');
 const projectControllers = require('./projectControllers');
+const uploadControllers = require('./uploadControllers');
 
 const apiControllers = express.Router();
 
@@ -10,5 +11,6 @@ apiControllers.get('/', (req, res) => {
 
 // Use projectControllers for project routes
 apiControllers.use('/projects', projectControllers);
+apiControllers.use('/upload', uploadControllers);
 
 module.exports = apiControllers;
