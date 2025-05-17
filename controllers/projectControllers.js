@@ -29,5 +29,30 @@ router.get('/', async (_, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const imagePath = getImagePath();
+    console.log(req.params.id);
+    const project = await db.project.findByPk(req.params.id);
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+    const imagesDir = path.join(imagePath, project.projectFolder);
+    let images = [];
+    try {
+      if (fs.existsSync(imagesDir)) {
+        images = fs.readdirSync(imagesDir);
+      }
+    } catch (err) {
+      console.error(`Error reading images for project ${project.id}:`, err);
+    }
+    project.dataValues.images = images;
+    res.json(project);
+  } catch (err) {
+    console.error('Error fetching project:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Export the router
 module.exports = router;
