@@ -47,4 +47,25 @@ router.post('/', upload.single('file'), (req, res) => {
     });
 });
 
+// Move the file into the final destination (project folder)
+router.post('/complete', (req, res) => {
+    const { filename, folder } = req.body;
+    const sourceFile = path.join(baseStoragePath, filename);
+    const destinationPath = path.join(baseStoragePath, folder);
+    const destinationFile = path.join(destinationPath, filename);
+    // Create the destination folder if it doesn't exist
+    fs.mkdir(destinationPath, { recursive: true }, (err) => {
+        if (err) {
+            return res.status(500).json({ message: 'Failed to create destination folder', error: err.message });
+        }
+    });
+
+    fs.rename(sourceFile, destinationFile, (err) => {
+        if (err) {
+            return res.status(500).json({ message: 'Failed to move file', error: err.message });
+        }
+        res.json({ message: 'File moved successfully', file: filename });
+    });
+});
+
 module.exports = router;
