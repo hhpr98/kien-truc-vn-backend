@@ -9,19 +9,12 @@ const baseStoragePath = getImagePath();
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        let folderName = req.body.folder || ''; // default to root if not provided
-        // Prevent directory traversal attacks
-        folderName = folderName.replace(/(\.\.(\/|\\|$))+/g, '');
-        const uploadPath = path.join(baseStoragePath, folderName);
-
         // Create the folder if it doesn't exist
-        fs.mkdir(uploadPath, { recursive: true }, (err) => {
-            if (err) {
+        fs.mkdir(baseStoragePath, { recursive: true }, (err) => {
+            if (err)
                 return cb(err);
-            }
-            // Save the folder info for later response (optional)
-            req.folder = folderName;
-            cb(null, uploadPath);
+
+            cb(null, baseStoragePath);
         });
     },
     filename: function (req, file, cb) {
@@ -50,8 +43,7 @@ router.post('/', upload.single('file'), (req, res) => {
     }
     res.json({
         filename: req.file.filename,
-        path: req.file.path,
-        folder: req.folder || null
+        path: req.file.path
     });
 });
 
