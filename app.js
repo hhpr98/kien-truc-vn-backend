@@ -6,8 +6,15 @@ const express = require('express');
 const apiControllers = require('./controllers/apiControllers');
 const getImagePath = require('./helpers/getImagePath');
 const path = require('path');
+const cors = require('cors');
 
 const app = express();
+
+// Allow cross-origin requests from the React app for development
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
 
 // structure on the host:
 // - webapp
