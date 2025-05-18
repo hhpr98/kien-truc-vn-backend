@@ -12,7 +12,10 @@ const app = express();
 
 // Allow cross-origin requests from the React app for development
 app.use(cors({
-  origin: 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',
+    'https://apdesignarch.vn'
+  ],
   credentials: true
 }));
 
