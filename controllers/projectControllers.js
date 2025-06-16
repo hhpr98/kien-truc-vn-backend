@@ -51,6 +51,9 @@ router.get('/last3', async (_, res) => {
         console.error(`Error reading images for project ${project.id}:`, err);
       }
       project.dataValues.images = images;
+      if (!project.dataValues.projectMainURL && images.length > 0) {
+        project.dataValues.projectMainURL = images[0];
+      }
     }
     res.json(projects);
   } catch (err) {
@@ -77,6 +80,9 @@ router.get('/:id', async (req, res) => {
       console.error(`Error reading images for project ${project.id}:`, err);
     }
     project.dataValues.images = images;
+    if (!project.dataValues.projectMainURL && images.length > 0) {
+      project.dataValues.projectMainURL = images[0];
+    }
     res.json(project);
   } catch (err) {
     console.error('Error fetching project:', err);
