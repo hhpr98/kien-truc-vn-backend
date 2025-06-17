@@ -90,5 +90,27 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+router.post('/', async (req, res) => {
+  try {
+    const { projectName, projectFolder } = req.body;
+    if (!projectName || !projectFolder) {
+      return res.status(400).json({ error: 'projectName and projectFolder are required' });
+    }
+
+    const productDetail = req.body.productDetail || '';
+    const projectDescription = req.body.projectDescription || '';
+    const newProject = await db.project.create({
+      projectName,
+      projectFolder,
+      productDetail,
+      projectDescription
+    });
+    res.status(201).json(newProject);
+  } catch (err) {
+    console.error('Error creating project:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Export the router
 module.exports = router;
