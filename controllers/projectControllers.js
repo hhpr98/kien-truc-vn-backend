@@ -3,6 +3,7 @@ const db = require('../models');
 const fs = require('fs');
 const path = require('path');
 const getImagePath = require('../helpers/getImagePath');
+const { v4: uuidv4 } = require('uuid');
 
 const router = express.Router();
 
@@ -100,6 +101,7 @@ router.post('/', async (req, res) => {
     const productDetail = req.body.productDetail || '';
     const projectDescription = req.body.projectDescription || '';
     const newProject = await db.project.create({
+      projectId: uuidv4(),
       projectName,
       projectFolder,
       productDetail,
