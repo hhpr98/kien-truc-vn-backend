@@ -1,4 +1,4 @@
-node v22.15.0
+node v22.16.0
 
 npm install sequelize sequelize-cli mysql2
 npx sequelize-cli init

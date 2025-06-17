@@ -114,5 +114,31 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.put('/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const projectName = req.body.projectName || "";
+    if (!id || !projectName) {
+      return res.status(400).json({ error: 'Project ID and projectName are required' });
+    }
+
+    const { productDetail, projectDescription, projectMainURL } = req.body;
+    const project = await db.project.findByPk(id);
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+    await project.update({
+      projectName,
+      productDetail,
+      projectDescription,
+      projectMainURL
+    });
+    res.json(project);
+  } catch (err) {
+    console.error('Error updating project:', err);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
 // Export the router
 module.exports = router;
